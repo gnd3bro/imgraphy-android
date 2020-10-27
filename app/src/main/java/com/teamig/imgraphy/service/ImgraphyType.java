@@ -3,6 +3,7 @@ package com.teamig.imgraphy.service;
 import com.google.gson.annotations.SerializedName;
 
 import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 public class ImgraphyType {
 
@@ -73,13 +74,12 @@ public class ImgraphyType {
 
             public static final String UPLOAD_FILE = "uploadfile";
 
-            public String tag, uploader;
-            public int license;
+            public RequestBody tag, uploader, license;
             public MultipartBody.Part uploadfile;
 
             public Upload() {}
 
-            public Upload(String tag, int license, String uploader, MultipartBody.Part uploadfile) {
+            public Upload(RequestBody tag, RequestBody license, RequestBody uploader, MultipartBody.Part uploadfile) {
                 this.tag = tag;
                 this.license = license;
                 this.uploader = uploader;

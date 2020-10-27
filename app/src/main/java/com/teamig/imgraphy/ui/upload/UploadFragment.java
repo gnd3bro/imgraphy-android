@@ -38,8 +38,6 @@ public class UploadFragment extends Fragment {
     private TextView uploadFormUserID;
     private Button uploadFormButton;
 
-    private ImgraphyType.Options.Upload uploadOption;
-
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         viewModel = new ViewModelProvider(this).get(UploadViewModel.class);
         root = inflater.inflate(R.layout.fragment_upload, container, false);
@@ -49,35 +47,7 @@ public class UploadFragment extends Fragment {
         uploadFormUserID = (TextView) root.findViewById(R.id.UploadFormUserID);
         uploadFormButton = (Button) root.findViewById(R.id.UploadFormButton);
 
-        uploadOption = new ImgraphyType.Options.Upload(null, 1, "user-test", null);
-
         uploadFormUserID.setText("user-test");
-
-        uploadFormTag.setOnKeyListener((v, keyCode, event) -> {
-            uploadOption.tag = uploadFormTag.getText().toString();
-
-            return false;
-        });
-
-        uploadFormLicense.setOnCheckedChangeListener((group, checkedId) -> {
-            int license = 1;
-
-            switch (checkedId) {
-                case R.id.License2 :
-                    license = 2;
-                    break;
-
-                case R.id.License3 :
-                    license = 3;
-                    break;
-
-                case R.id.License4 :
-                    license = 4;
-                    break;
-            }
-
-            uploadOption.license = license;
-        });
 
         uploadFormButton.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_GET_CONTENT)
@@ -107,14 +77,28 @@ public class UploadFragment extends Fragment {
             }
 
             viewModel.getByte(inputStream).observe(getViewLifecycleOwner(), byteData -> {
-                RequestBody requestFile = RequestBody.create(MediaType.parse(type), byteData);
-                uploadOption.uploadfile = MultipartBody.Part.createFormData(
+                RequestBody tags = RequestBody.create(
+                        MediaType.parse("multipart/form-data"), uploadFormTag.getText().toString());
+                RequestBody license = RequestBody.create(MediaType.parse("multipart/form-data"),
+                        String.valueOf(uploadFormLicense.indexOfChild(root.findViewById(uploadFormLicense.getCheckedRadioButtonId())) + 1));
+                RequestBody uploader = RequestBody.create(MediaType.parse("multipart/form-data"),
+                        uploadFormUserID.getText().toString());
+
+                RequestBody requestBody = RequestBody.create(MediaType.parse(type), byteData);
+                MultipartBody.Part requestFile = MultipartBody.Part.createFormData(
                         ImgraphyType.Options.Upload.UPLOAD_FILE,
-                        String.format("%s.%s", uploadOption.uploader, ext),
+                        String.format("%s.%s", uploader, ext),
+                        requestBody
+                );
+
+                ImgraphyType.Options.Upload option = new ImgraphyType.Options.Upload(
+                        tags,
+                        license,
+                        uploader,
                         requestFile
                 );
 
-                viewModel.uploadFile(uploadOption).observe(getViewLifecycleOwner(), result -> {
+                viewModel.uploadFile(option).observe(getViewLifecycleOwner(), result -> {
                     Toast.makeText(this.getContext(), result.code + ": " + result.log, Toast.LENGTH_LONG).show();
                 });
             });

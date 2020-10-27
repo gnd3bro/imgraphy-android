@@ -20,11 +20,17 @@ public class GraphyListAdapter extends RecyclerView.Adapter<GraphyListAdapter.Vi
 
     private List<ImgraphyType.Graphy> graphyList;
 
+    private OnItemClickListener onItemClickListener;
+
+    public GraphyListAdapter() {
+        this.onItemClickListener = null;
+    }
+
     @NonNull
     @Override
     public GraphyListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = (View) LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.layout_list_item, parent, false);
+                .inflate(R.layout.layout_graphy_list_item, parent, false);
 
         return new ViewHolder(v);
     }
@@ -45,6 +51,12 @@ public class GraphyListAdapter extends RecyclerView.Adapter<GraphyListAdapter.Vi
 
         listItemShareCount.setText(String.valueOf(graphy.shrcnt));
         listItemFavCount.setText(String.valueOf(graphy.favcnt));
+
+        holder.view.setOnClickListener(v -> {
+            if (onItemClickListener != null) {
+                onItemClickListener.onItemClick(v, graphy);
+            }
+        });
     }
 
     @Override
@@ -59,6 +71,7 @@ public class GraphyListAdapter extends RecyclerView.Adapter<GraphyListAdapter.Vi
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public View view;
+
         public ViewHolder(View v) {
             super(v);
             view = v;
@@ -68,5 +81,13 @@ public class GraphyListAdapter extends RecyclerView.Adapter<GraphyListAdapter.Vi
     public void updateList(List<ImgraphyType.Graphy> list) {
         graphyList = list;
         notifyDataSetChanged();
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(View v, ImgraphyType.Graphy graphy);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener i) {
+        this.onItemClickListener = i;
     }
 }

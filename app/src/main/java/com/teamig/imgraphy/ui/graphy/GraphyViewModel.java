@@ -12,7 +12,7 @@ public class GraphyViewModel extends ViewModel {
     private final Imgraphy imgraphy;
 
     public GraphyViewModel() {
-        imgraphy = new Imgraphy();
+        this.imgraphy = new Imgraphy();
     }
 
     public LiveData<List<ImgraphyType.Graphy>> getGraphy(ImgraphyType.Options.List option) {

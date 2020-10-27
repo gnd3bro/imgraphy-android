@@ -10,7 +10,7 @@
         android:id="@+id/GraphyListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/layout_list_item"/>
+        tools:listitem="@layout/layout_graphy_list_item"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -54,5 +54,34 @@
             android:foreground="@drawable/ic_clear" />
 
     </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/GraphyViewContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBackground"
+        android:visibility="invisible">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/GraphyViewImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                app:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="원본 이미지" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/TagListView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/GraphyViewImage"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

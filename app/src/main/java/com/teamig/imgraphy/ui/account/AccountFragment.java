@@ -7,29 +7,51 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.teamig.imgraphy.R;
+import com.teamig.imgraphy.adapter.GraphyListAdapter;
+import com.teamig.imgraphy.service.ImgraphyType;
 
 public class AccountFragment extends Fragment {
 
-    private AccountViewModel accountViewModel;
+    private AccountViewModel viewModel;
+    private View root;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        accountViewModel =
-                new ViewModelProvider(this).get(AccountViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_account, container, false);
-        final TextView textView = root.findViewById(R.id.text_dashboard);
-        accountViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
+    private RecyclerView graphyListView;
+    private GraphyListAdapter graphyListAdapter;
+    private StaggeredGridLayoutManager graphyListLayoutManager;
+
+    private TextView imgraphyUserId;
+
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        viewModel = new ViewModelProvider(this).get(AccountViewModel.class);
+        root = inflater.inflate(R.layout.fragment_account, container, false);
+
+        graphyListView = (RecyclerView) root.findViewById(R.id.GraphyListView);
+        graphyListAdapter = new GraphyListAdapter();
+        graphyListLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+
+        graphyListView.setHasFixedSize(true);
+        graphyListView.setAdapter(graphyListAdapter);
+        graphyListView.setLayoutManager(graphyListLayoutManager);
+
+        imgraphyUserId = (TextView) root.findViewById(R.id.ImgraphyUserId);
+
+        viewModel.getUserID().observe(getViewLifecycleOwner(), s -> {
+            imgraphyUserId.setText(s);
+
+            viewModel.getGraphy(new ImgraphyType.Options.List(50, 0, s))
+                    .observe(getViewLifecycleOwner(), graphy -> {
+                        graphyListAdapter.updateList(graphy);
+                        graphyListAdapter.notifyDataSetChanged();
+                        graphyListView.scrollToPosition(0);
+                    });
         });
+
         return root;
     }
 }
