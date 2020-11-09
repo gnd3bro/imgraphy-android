@@ -1,23 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<soup.neumorphism.NeumorphCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
-    android:background="@color/colorPrimaryDark"
-    android:clickable="true"
+    style="@style/Neumorphism.CardView"
     android:focusable="true"
-    android:orientation="horizontal">
+    android:clickable="true">
 
     <TextView
         android:id="@+id/ListItemTag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:text="@string/app_name"
-        android:textAppearance="@style/Font.TextButton"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"/>
+        android:padding="10dp"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:text="@string/ui_tag_temp"
+        android:textAppearance="@style/Font.MainList"
+        android:textColor="@color/neumorphism.Text" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</soup.neumorphism.NeumorphCardView>

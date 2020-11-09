@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+style="@style/ListFadingEdge"
+tools:context=".ui.viewer.ViewerFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <soup.neumorphism.NeumorphCardView
+            android:id="@+id/ViewerImageContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Neumorphism.CardView"
+            app:neumorph_strokeColor="@color/neumorphism.Background"
+            app:neumorph_strokeWidth="@dimen/neumorphism_stroke"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/ViewerImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_image"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@string/ui_image_description"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/neumorphism_info_bar_size"
+                    android:padding="10dp"
+                    android:background="@color/neumorphism.Background"
+                    app:layout_constraintTop_toBottomOf="@id/ViewerImage">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:src="@drawable/ic_share" />
+
+                    <TextView
+                        android:id="@+id/ViewerShareCount"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:text="@string/ui_count"
+                        android:textColor="@color/neumorphism.Stroke"
+                        android:textAppearance="@style/Font.Description"/>
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:scaleType="fitEnd"
+                        android:src="@drawable/ic_like"/>
+
+                    <TextView
+                        android:id="@+id/ViewerFavCount"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/ui_count"
+                        android:textColor="@color/neumorphism.Stroke"
+                        android:textAppearance="@style/Font.Description"/>
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </soup.neumorphism.NeumorphCardView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/TagListView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/ViewerImageContainer"
+            tools:listitem="@layout/layout_tag_list_item"/>
+
+        <soup.neumorphism.NeumorphCardView
+            android:id="@+id/ViewerLicenseContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="?attr/actionBarSize"
+            style="@style/Neumorphism.CardView"
+            app:layout_constraintTop_toBottomOf="@id/TagListView"
+            app:layout_constraintLeft_toLeftOf="parent">
+
+            <TextView
+                android:id="@+id/ViewerLicense"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingStart="@dimen/neumorphism_padding"
+                android:paddingEnd="@dimen/neumorphism_padding"
+                android:gravity="center_vertical"
+                android:text="@string/ui_license"
+                android:textAppearance="@style/Font.SubHeader"
+                android:textColor="@color/neumorphism.Stroke"/>
+
+        </soup.neumorphism.NeumorphCardView>
+
+        <soup.neumorphism.NeumorphCardView
+            android:id="@+id/ViewerUserIdContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="?attr/actionBarSize"
+            android:focusable="true"
+            android:clickable="true"
+            style="@style/Neumorphism.CardView"
+            app:layout_constraintTop_toBottomOf="@id/ViewerLicenseContainer"
+            app:layout_constraintLeft_toLeftOf="parent">
+
+            <TextView
+                android:id="@+id/ViewerUserId"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingStart="@dimen/neumorphism_padding"
+                android:paddingEnd="@dimen/neumorphism_padding"
+                android:gravity="center_vertical"
+                android:text="@string/ui_user_id_temp"
+                android:textAppearance="@style/Font.SubHeader"
+                android:textColor="@color/neumorphism.Text"/>
+
+        </soup.neumorphism.NeumorphCardView>
+
+        <soup.neumorphism.NeumorphButton
+            android:id="@+id/ViewerDeprecateButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:text="@string/ui_delete_image"
+            android:textAppearance="@style/Font.TextButton"
+            android:textColor="@color/neumorphism.Text"
+            style="@style/Neumorphism.Button"
+            app:neumorph_backgroundColor="@color/neumorphism.Accent"
+            app:layout_constraintTop_toBottomOf="@id/ViewerUserIdContainer"/>
+
+        <!--TODO: Add Like and share button with counting share-->
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

@@ -9,17 +9,73 @@
         android:id="@+id/navigation_graphy"
         android:name="com.teamig.imgraphy.ui.graphy.GraphyFragment"
         android:label="@string/title_graphy"
-        tools:layout="@layout/fragment_graphy" />
+        tools:layout="@layout/fragment_graphy" >
+
+        <argument android:name="userID"
+            app:argType="string"
+            app:nullable="false"/>
+        <argument
+            android:name="keyword"
+            app:argType="string"
+            app:nullable="true" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_viewer"
+        android:name="com.teamig.imgraphy.ui.viewer.ViewerFragment"
+        android:label="@string/title_viewer"
+        tools:layout="@layout/fragment_viewer" >
+
+        <argument android:name="userID"
+            app:argType="string"
+            app:nullable="false"/>
+
+        <argument
+            android:name="parcelableGraphy"
+            app:argType="com.teamig.imgraphy.service.ImgraphyType$ParcelableGraphy" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_upload"
         android:name="com.teamig.imgraphy.ui.upload.UploadFragment"
         android:label="@string/title_upload"
-        tools:layout="@layout/fragment_upload" />
+        tools:layout="@layout/fragment_upload" >
+
+        <argument android:name="userID"
+            app:argType="string"
+            app:nullable="false"/>
+
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_account"
         android:name="com.teamig.imgraphy.ui.account.AccountFragment"
         android:label="@string/title_account"
-        tools:layout="@layout/fragment_account" />
+        tools:layout="@layout/fragment_account" >
+
+        <argument android:name="userID"
+            app:argType="string"
+            app:nullable="false"/>
+
+    </fragment>
+
+    <action
+        android:id="@+id/action_global_navigation_graphy"
+        app:destination="@id/navigation_graphy"
+        app:popUpTo="@id/navigation_graphy"
+        app:popUpToInclusive="true" />
+    <action
+        android:id="@+id/action_global_navigation_viewer"
+        app:destination="@id/navigation_viewer" />
+    <action
+        android:id="@+id/action_global_navigation_upload"
+        app:destination="@id/navigation_upload"
+        app:popUpTo="@id/navigation_graphy" />
+    <action
+        android:id="@+id/action_global_navigation_account"
+        app:destination="@id/navigation_account"
+        app:popUpTo="@id/navigation_graphy" />
+
 </navigation>

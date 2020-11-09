@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#e40475</color>
-    <color name="colorPrimaryDark">#ad0057</color>
-    <color name="colorAccent">#48e0e4</color>
-    <color name="colorBackground">#0e0220</color>
-    <color name="colorStroke">#2b0663</color>
-    <color name="colorHighlight">#d7fbf6</color>
-    <color name="colorButton">@android:color/transparent</color>
-    <color name="colorListItemBackground">@android:color/transparent</color>
-    <color name="colorText">#e6e6e6</color>
+    <color name="neumorphism.Background">#303135</color>>
+    <color name="neumorphism.Stroke">#7b808c</color>
+    <color name="neumorphism.ShadowLight">#3d3e44</color>
+    <color name="neumorphism.ShadowDark">#252525</color>
+    <color name="neumorphism.Accent">#ff4539</color>
+    <color name="neumorphism.Text">#ffffff</color>
 </resources>

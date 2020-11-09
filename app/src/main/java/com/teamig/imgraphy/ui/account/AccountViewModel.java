@@ -1,7 +1,6 @@
 package com.teamig.imgraphy.ui.account;
 
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.teamig.imgraphy.service.Imgraphy;
@@ -20,13 +19,5 @@ public class AccountViewModel extends ViewModel {
     public LiveData<List<ImgraphyType.Graphy>> getGraphy(ImgraphyType.Options.List option) {
 
         return imgraphy.requestList(option);
-    }
-
-    public LiveData<String> getUserID() {
-        MutableLiveData<String> userId = new MutableLiveData<>();
-        // something to return userid
-        userId.setValue("user-test");
-
-        return userId;
     }
 }

@@ -1,87 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".ui.graphy.GraphyFragment">
+
+    <LinearLayout
+        android:id="@+id/GraphySearchContainer"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <soup.neumorphism.NeumorphImageButton
+            android:id="@+id/GraphyListRefresh"
+            android:layout_width="?attr/actionBarSize"
+            android:layout_height="match_parent"
+            android:padding="15dp"
+            android:src="@drawable/ic_find_replace"
+            style="@style/Neumorphism.ImageButton"/>
+
+        <soup.neumorphism.NeumorphCardView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            style="@style/Neumorphism.CardView">
+
+            <EditText
+                android:id="@+id/GraphySearchInput"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingStart="@dimen/neumorphism_padding"
+                android:paddingEnd="@dimen/neumorphism_padding"
+                android:background="@null"
+                android:hint="@string/ui_search_hint"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:textAppearance="@style/Font.SubHeader"
+                android:textColor="@color/neumorphism.Text"
+                android:textColorHint="@color/neumorphism.Stroke"/>
+
+        </soup.neumorphism.NeumorphCardView>
+
+        <soup.neumorphism.NeumorphImageButton
+            android:id="@+id/GraphyClearInput"
+            android:layout_width="?attr/actionBarSize"
+            android:layout_height="match_parent"
+            android:padding="15dp"
+            android:src="@drawable/ic_clear"
+            style="@style/Neumorphism.ImageButton"/>
+
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/GraphyListView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        tools:itemCount="20"
+        style="@style/ListFadingEdge"
+        app:layout_constraintTop_toBottomOf="@id/GraphySearchContainer"
+        app:layout_constraintBottom_toBottomOf="parent"
         tools:listitem="@layout/layout_graphy_list_item"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:background="@color/colorButton"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <Button
-            android:id="@+id/GraphyListRefresh"
-            style="?attr/borderlessButtonStyle"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_gravity="center"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="15dp"
-            android:background="@drawable/search_btn_bg"
-            android:foreground="@drawable/ic_find_replace" />
-
-        <EditText
-            android:id="@+id/GraphySearchInput"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@null"
-            android:hint="검색"
-            android:imeOptions="actionSearch"
-            android:inputType="text"
-            android:textAppearance="@style/Font.TextButton"
-            android:textColor="@color/colorText" />
-
-        <Button
-            android:id="@+id/GraphyClearInput"
-            style="?attr/borderlessButtonStyle"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_gravity="center"
-            android:layout_marginStart="15dp"
-            android:layout_marginEnd="20dp"
-            android:background="@drawable/search_btn_bg"
-            android:foreground="@drawable/ic_clear" />
-
-    </LinearLayout>
-
-    <ScrollView
-        android:id="@+id/GraphyViewContainer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorBackground"
-        android:visibility="invisible">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <ImageView
-                android:id="@+id/GraphyViewImage"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                app:layout_constraintTop_toTopOf="parent"
-                android:contentDescription="원본 이미지" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/TagListView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@id/GraphyViewImage"/>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

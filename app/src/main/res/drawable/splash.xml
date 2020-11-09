@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/neumorphism.Background"/>
+        </shape>
+    </item>
+
+    <item
+        android:drawable="@drawable/ic_ig"
+        android:width="100dp"
+        android:height="100dp"
+        android:gravity="center"/>
+
+</layer-list>

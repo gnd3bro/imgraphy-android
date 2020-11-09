@@ -1,16 +1,14 @@
 package com.teamig.imgraphy.adapter;
 
+import android.nfc.Tag;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.teamig.imgraphy.R;
 import com.teamig.imgraphy.service.ImgraphyType;
 
@@ -20,17 +18,17 @@ public class TagListAdapter extends RecyclerView.Adapter<TagListAdapter.ViewHold
 
     private List<String> tagList;
 
-    private View.OnClickListener onItemClickListener;
+    private OnItemClickListener onItemClickListener;
+
+    public TagListAdapter() {
+        this.onItemClickListener = null;
+    }
 
     @NonNull
     @Override
     public TagListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = (View) LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.layout_tag_list_item, parent, false);
-
-        if (onItemClickListener != null) {
-            v.setOnClickListener(onItemClickListener);
-        }
 
         return new ViewHolder(v);
     }
@@ -40,6 +38,12 @@ public class TagListAdapter extends RecyclerView.Adapter<TagListAdapter.ViewHold
         TextView listItemTag = (TextView) holder.view.findViewById(R.id.ListItemTag);
 
         listItemTag.setText(tagList.get(position));
+
+        holder.view.setOnClickListener(v -> {
+            if (onItemClickListener != null) {
+                onItemClickListener.onItemClick(v, tagList.get(position));
+            }
+        });
     }
 
     @Override
@@ -66,7 +70,11 @@ public class TagListAdapter extends RecyclerView.Adapter<TagListAdapter.ViewHold
         notifyDataSetChanged();
     }
 
-    public void setOnItemClickListener(View.OnClickListener onClickListener) {
-        this.onItemClickListener = onClickListener;
+    public interface OnItemClickListener {
+        void onItemClick(View v, String s);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener i) {
+        this.onItemClickListener = i;
     }
 }

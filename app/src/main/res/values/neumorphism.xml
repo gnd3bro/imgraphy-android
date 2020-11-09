@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Neumorphism.CardView" parent="Widget.Neumorph.CardView">
+        <item name="neumorph_shadowElevation">6dp</item>
+        <item name="neumorph_shadowColorLight">@color/neumorphism.ShadowLight</item>
+        <item name="neumorph_shadowColorDark">@color/neumorphism.ShadowDark</item>
+        <item name="neumorph_backgroundColor">@color/neumorphism.Background</item>
+    </style>
+
+    <style name="Neumorphism.ImageView" parent="Widget.Neumorph.ImageView">
+        <item name="neumorph_shadowElevation">6dp</item>
+        <item name="neumorph_shadowColorLight">@color/neumorphism.ShadowLight</item>
+        <item name="neumorph_shadowColorDark">@color/neumorphism.ShadowDark</item>
+        <item name="neumorph_backgroundColor">@color/neumorphism.Background</item>
+        <item name="neumorph_strokeColor">@color/neumorphism.Background</item>
+        <item name="neumorph_strokeWidth">@dimen/neumorphism_stroke</item>
+    </style>
+
+    <style name="Neumorphism.Button" parent="Widget.Neumorph.Button">
+        <item name="neumorph_shadowElevation">6dp</item>
+        <item name="neumorph_shadowColorLight">@color/neumorphism.ShadowLight</item>
+        <item name="neumorph_shadowColorDark">@color/neumorphism.ShadowDark</item>
+        <item name="neumorph_backgroundColor">@color/neumorphism.Background</item>
+    </style>
+
+    <style name="Neumorphism.ImageButton" parent="Widget.Neumorph.Button">
+        <item name="neumorph_shadowElevation">6dp</item>
+        <item name="neumorph_shadowColorLight">@color/neumorphism.ShadowLight</item>
+        <item name="neumorph_shadowColorDark">@color/neumorphism.ShadowDark</item>
+        <item name="neumorph_backgroundColor">@color/neumorphism.Background</item>
+    </style>
+
+    <style name="Neumorphism.TextView" parent="Widget.Neumorph.TextView">
+        <item name="neumorph_shadowElevation">6dp</item>
+        <item name="neumorph_shadowColorLight">@color/neumorphism.ShadowLight</item>
+        <item name="neumorph_shadowColorDark">@color/neumorphism.ShadowDark</item>
+    </style>
+
+    <style name="ListFadingEdge">
+        <item name="android:fadingEdge">horizontal</item>
+        <item name="android:fadingEdgeLength">@dimen/neumorphism_fading_edge_length</item>
+        <item name="android:fillViewport">false</item>
+        <item name="android:requiresFadingEdge">vertical</item>
+    </style>
+</resources>
