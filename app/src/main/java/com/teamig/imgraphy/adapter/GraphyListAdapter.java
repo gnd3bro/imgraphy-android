@@ -8,25 +8,36 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners;
-import com.bumptech.glide.request.target.DrawableImageViewTarget;
 import com.bumptech.glide.request.target.Target;
 import com.teamig.imgraphy.R;
 import com.teamig.imgraphy.service.ImgraphyType;
+import com.teamig.imgraphy.tool.GlideApp;
 
 import java.util.List;
 
 public class GraphyListAdapter extends RecyclerView.Adapter<GraphyListAdapter.ViewHolder> {
 
-    private List<ImgraphyType.Graphy> graphyList;
+    private boolean isOnLoading;
+    private boolean isEndOfRequest;
 
+    private List<ImgraphyType.Graphy> graphyList;
+    private RecyclerView graphyListView;
     private OnItemClickListener onItemClickListener;
 
     public GraphyListAdapter() {
-        this.onItemClickListener = null;
+        onItemClickListener = null;
+        isOnLoading = false;
+        isEndOfRequest = false;
+    }
+
+    public GraphyListAdapter(RecyclerView graphyListView) {
+        this.graphyListView = graphyListView;
+        onItemClickListener = null;
+        isOnLoading = false;
+        isEndOfRequest = false;
     }
 
     @NonNull
@@ -46,15 +57,11 @@ public class GraphyListAdapter extends RecyclerView.Adapter<GraphyListAdapter.Vi
 
         ImgraphyType.Graphy graphy = graphyList.get(position);
 
-
-        /* TODO: Neumorphism Library Bug */
-        // Temporary Work
-        // Soup's Neumorphism Library has performance issue with recycle view
-        Glide.with(holder.view)
+        GlideApp.with(holder.view)
                 .load("https://api.novang.tk/imgraphy/files/thumb/" + graphy.uuid)
-                .transform(new GranularRoundedCorners(22, 22, 0, 0))
                 .placeholder(R.drawable.ic_image)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .skipMemoryCache(false)
+                .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                 .override(Target.SIZE_ORIGINAL)
                 .into(listItemImage);
 
@@ -70,7 +77,7 @@ public class GraphyListAdapter extends RecyclerView.Adapter<GraphyListAdapter.Vi
 
     @Override
     public int getItemCount() {
-        if (graphyList== null) {
+        if (graphyList == null) {
 
             return 0;
         }
@@ -88,15 +95,56 @@ public class GraphyListAdapter extends RecyclerView.Adapter<GraphyListAdapter.Vi
     }
 
     public void updateList(List<ImgraphyType.Graphy> list) {
+        isOnLoading = false;
+        isEndOfRequest = false;
         graphyList = list;
         notifyDataSetChanged();
+    }
+
+    public void putList(List<ImgraphyType.Graphy> list) {
+        if (list.size() == 0) {
+            isEndOfRequest = true;
+        } else if (list != null && !isEndOfRequest) {
+            int lastSize = graphyList.size();
+
+            graphyList.addAll(list);
+            notifyItemRangeInserted(lastSize, list.size());
+        }
+    }
+
+    public void setOnLoading(boolean bool) {
+        isOnLoading = bool;
     }
 
     public interface OnItemClickListener {
         void onItemClick(View v, ImgraphyType.Graphy graphy);
     }
 
+    public interface OnScrollLastItemListener {
+        void onItemClick(GraphyListAdapter adapter);
+    }
+
     public void setOnItemClickListener(OnItemClickListener i) {
         this.onItemClickListener = i;
+    }
+
+    public void setOnScrollLastItemListener(OnScrollLastItemListener onScrollLastItemListener) {
+        graphyListView.clearOnScrollListeners();
+        graphyListView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                StaggeredGridLayoutManager layoutManager = (StaggeredGridLayoutManager) recyclerView.getLayoutManager();
+                GraphyListAdapter listAdapter = (GraphyListAdapter) recyclerView.getAdapter();
+                int[] lastVisibleItemPositions = new int[2];
+                layoutManager.findLastCompletelyVisibleItemPositions(lastVisibleItemPositions);
+                int lastItemPosition = Math.max(lastVisibleItemPositions[0], lastVisibleItemPositions[1]);
+
+                if(listAdapter.getItemCount() - 1 == lastItemPosition && !isOnLoading && !isEndOfRequest) {
+                    listAdapter.setOnLoading(true);
+                    onScrollLastItemListener.onItemClick(listAdapter);
+                }
+            }
+        });
     }
 }

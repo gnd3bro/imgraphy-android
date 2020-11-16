@@ -21,19 +21,27 @@
             android:paddingStart="@dimen/neumorphism_padding"
             android:paddingEnd="@dimen/neumorphism_padding"
             android:gravity="center_vertical"
-            android:text="@string/ui_user_id_temp"
-            android:textAppearance="@style/Font.SubHeader"/>
+            android:text="@string/ui_account_my_graphy"
+            android:textAppearance="@style/Font.MainList"/>
 
     </soup.neumorphism.NeumorphCardView>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/GraphyListView"
+    <soup.neumorphism.NeumorphCardView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        tools:itemCount="20"
-        style="@style/ListFadingEdge"
+        style="@style/Neumorphism.CardView"
+        app:neumorph_shapeType="pressed"
         app:layout_constraintTop_toBottomOf="@id/ImgraphyUserIdContainer"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:listitem="@layout/layout_graphy_list_item"/>
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/GraphyListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/neumorphism_padding"
+            style="@style/ListFadingEdge"
+            tools:listitem="@layout/layout_graphy_list_item"/>
+
+    </soup.neumorphism.NeumorphCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

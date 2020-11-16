@@ -79,11 +79,35 @@ tools:context=".ui.viewer.ViewerFragment">
 
         </soup.neumorphism.NeumorphCardView>
 
+        <soup.neumorphism.NeumorphButton
+            android:id="@+id/ViewerShareButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/ui_share"
+            android:textAppearance="@style/Font.TextButton"
+            android:textColor="@color/neumorphism.Accent"
+            style="@style/Neumorphism.Button"
+            app:layout_constraintTop_toBottomOf="@id/ViewerImageContainer"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/ViewerFavButton"/>
+
+        <soup.neumorphism.NeumorphImageButton
+            android:id="@+id/ViewerFavButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            android:tint="@color/neumorphism.Stroke"
+            android:src="@drawable/ic_like"
+            style="@style/Neumorphism.ImageButton"
+            app:layout_constraintTop_toBottomOf="@id/ViewerImageContainer"
+            app:layout_constraintLeft_toRightOf="@id/ViewerShareButton"
+            app:layout_constraintRight_toRightOf="parent"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/TagListView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/ViewerImageContainer"
+            app:layout_constraintTop_toBottomOf="@id/ViewerShareButton"
             tools:listitem="@layout/layout_tag_list_item"/>
 
         <soup.neumorphism.NeumorphCardView
@@ -108,13 +132,34 @@ tools:context=".ui.viewer.ViewerFragment">
         </soup.neumorphism.NeumorphCardView>
 
         <soup.neumorphism.NeumorphCardView
+            android:id="@+id/ViewerDateContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="?attr/actionBarSize"
+            style="@style/Neumorphism.CardView"
+            app:layout_constraintTop_toBottomOf="@id/ViewerLicenseContainer"
+            app:layout_constraintLeft_toLeftOf="parent">
+
+            <TextView
+                android:id="@+id/ViewerDate"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingStart="@dimen/neumorphism_padding"
+                android:paddingEnd="@dimen/neumorphism_padding"
+                android:gravity="center_vertical"
+                android:text="@string/ui_date_temp"
+                android:textAppearance="@style/Font.SubHeader"
+                android:textColor="@color/neumorphism.Stroke"/>
+
+        </soup.neumorphism.NeumorphCardView>
+
+        <soup.neumorphism.NeumorphCardView
             android:id="@+id/ViewerUserIdContainer"
             android:layout_width="wrap_content"
             android:layout_height="?attr/actionBarSize"
             android:focusable="true"
             android:clickable="true"
             style="@style/Neumorphism.CardView"
-            app:layout_constraintTop_toBottomOf="@id/ViewerLicenseContainer"
+            app:layout_constraintTop_toBottomOf="@id/ViewerDateContainer"
             app:layout_constraintLeft_toLeftOf="parent">
 
             <TextView
@@ -142,7 +187,6 @@ tools:context=".ui.viewer.ViewerFragment">
             app:neumorph_backgroundColor="@color/neumorphism.Accent"
             app:layout_constraintTop_toBottomOf="@id/ViewerUserIdContainer"/>
 
-        <!--TODO: Add Like and share button with counting share-->
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

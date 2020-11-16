@@ -3,7 +3,8 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="neumorphism_info_bar_size">40dp</dimen>
-    <dimen name="neumorphism_fading_edge_length">40dp</dimen>
+    <dimen name="neumorphism_fading_edge_length">24dp</dimen>
     <dimen name="neumorphism_padding">12dp</dimen>
     <dimen name="neumorphism_stroke">2dp</dimen>
+    <dimen name="neumorphism_corner_radius">24dp</dimen>
 </resources>

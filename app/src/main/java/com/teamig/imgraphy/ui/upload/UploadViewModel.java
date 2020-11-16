@@ -1,12 +1,12 @@
 package com.teamig.imgraphy.ui.upload;
 
-import android.app.Application;
+import android.content.ContentResolver;
 import android.net.Uri;
 import android.webkit.MimeTypeMap;
 
-import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 
 import com.bumptech.glide.util.ByteBufferUtil;
 import com.teamig.imgraphy.service.Imgraphy;
@@ -14,37 +14,42 @@ import com.teamig.imgraphy.service.ImgraphyType;
 
 import java.io.InputStream;
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
-public class UploadViewModel extends AndroidViewModel {
+public class UploadViewModel extends ViewModel {
 
     MutableLiveData<String> userID;
+    MutableLiveData<List<String>> inputTagList;
     MutableLiveData<Uri> fileUri;
     MutableLiveData<byte[]> fileByteData;
     MutableLiveData<String> fileType;
 
     private final Imgraphy imgraphy;
-    private final Application application;
 
-    public UploadViewModel(Application application) {
-        super(application);
-
+    public UploadViewModel() {
         userID = new MutableLiveData<>();
+        inputTagList = new MutableLiveData<>(new ArrayList<>());
         fileUri = new MutableLiveData<>();
         fileByteData = new MutableLiveData<>();
         fileType = new MutableLiveData<>();
 
-        this.application = application;
         imgraphy = new Imgraphy();
     }
 
-    public LiveData<ImgraphyType.Result> uploadFile(String tags, int license) {
+    public LiveData<ImgraphyType.Result> uploadFile(int license) {
         String ext = MimeTypeMap.getSingleton().getExtensionFromMimeType(fileType.getValue());
+        StringBuilder tags = new StringBuilder();
 
-        RequestBody tagsRB = RequestBody.create(MediaType.parse("multipart/form-data"), tags);
+        for (String s : inputTagList.getValue()) {
+            tags.append(s).append(";");
+        }
+
+        RequestBody tagsRB = RequestBody.create(MediaType.parse("multipart/form-data"), tags.toString());
         RequestBody licenseRB = RequestBody.create(MediaType.parse("multipart/form-data"), String.valueOf(license));
         RequestBody uploaderRB = RequestBody.create(MediaType.parse("multipart/form-data"), userID.getValue());
 
@@ -65,11 +70,11 @@ public class UploadViewModel extends AndroidViewModel {
         return imgraphy.uploadGraphy(option);
     }
 
-    public void fileToByteArray(Uri uri) {
-        String type = application.getContentResolver().getType(uri);
+    public void fileToByteArray(ContentResolver contentResolver, Uri uri) {
+        String type = contentResolver.getType(uri);
 
         try {
-            InputStream inputStream = application.getContentResolver().openInputStream(uri);
+            InputStream inputStream = contentResolver.openInputStream(uri);
             ByteBuffer byteBuffer = ByteBufferUtil.fromStream(inputStream);
 
             byte[] bytesArray = new byte[byteBuffer.remaining()];

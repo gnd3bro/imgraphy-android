@@ -106,20 +106,20 @@ public class ImgraphyType {
 
         public static class List {
 
-            public int count_per_page, page;
+            public int max, from;
             public String keyword;
 
             public List() {}
 
-            public List(int count_per_page, int page) {
-                this.count_per_page = count_per_page;
-                this.page = page;
+            public List(int max, int from) {
+                this.max = max;
+                this.from = from;
                 this.keyword = "";
             }
 
-            public List(int count_per_page, int page, String keyword) {
-                this.count_per_page = count_per_page;
-                this.page = page;
+            public List(int max, int from, String keyword) {
+                this.max = max;
+                this.from = from;
                 this.keyword = keyword;
             }
         }
@@ -143,13 +143,16 @@ public class ImgraphyType {
 
         public static class Vote {
 
-            public String uuid, column, type;
+            public static final String INCREMENT = "inc";
+            public static final String DECREMENT = "dec";
+
+            public String uuid, userid, type;
 
             public Vote() {}
 
-            public Vote(String uuid, String column, String type) {
+            public Vote(String uuid, String userid, String type) {
                 this.uuid = uuid;
-                this.column = column;
+                this.userid = userid;
                 this.type = type;
             }
         }

@@ -1,28 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="6dp"
+    app:cardCornerRadius="@dimen/neumorphism_corner_radius"
+    app:cardBackgroundColor="@color/neumorphism.ShadowLight"
+    app:cardElevation="0dp"
     android:focusable="true"
     android:clickable="true">
 
-    <soup.neumorphism.NeumorphImageView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        style="@style/Neumorphism.ImageView"
-        app:neumorph_strokeColor="@color/neumorphism.Background"
-        app:neumorph_strokeWidth="@dimen/neumorphism_stroke"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-
-    <!--TODO: Neumorphism Library Bug-->
-    <!--Soup's Neumorphism Library has performance issue with recycle view-->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/neumorphism_padding"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/ListItemImage"
@@ -76,4 +67,4 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

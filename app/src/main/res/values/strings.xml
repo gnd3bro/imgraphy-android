@@ -2,8 +2,8 @@
     <string name="app_name">Imgraphy</string>
     <string name="title_graphy">Graphy</string>
     <string name="title_viewer">Viewer</string>
-    <string name="title_upload">Upload</string>
-    <string name="title_account">Account</string>
+    <string name="title_upload">업로드</string>
+    <string name="title_account">계정</string>
     <string name="license_non">No License (없음)</string>
     <string name="license_att">Attribution (저작자 표시)</string>
     <string name="license_ncc">Non-Commercial (비영리)</string>
@@ -15,8 +15,18 @@
     <string name="ui_count">count</string>
     <string name="ui_image_description">이미지</string>
     <string name="ui_select_image">이미지 선택</string>
-    <string name="ui_input_tags">태그 입력 (\';\' 으로 구분)</string>
+    <string name="ui_input_tags">태그 입력</string>
     <string name="ui_tag_temp">tag</string>
     <string name="ui_accept">동의</string>
     <string name="ui_search_hint">검색 (태그, 사용자 ID)</string>
+    <string name="ui_share">공유</string>
+    <string name="ui_service_policy">서비스 이용 약관</string>
+    <string name="ui_image_delete_dialog_msg">이미지를 삭제하시겠습니까?</string>
+    <string name="ui_image_delete_dialog_title">경고</string>
+    <string name="ui_image_delete_dialog_confirm">삭제</string>
+    <string name="ui_image_delete_dialog_cancel">취소</string>
+    <string name="ui_date_temp">2020-01-01 10:10</string>
+    <string name="ui_account_my_graphy">내 게시물</string>
+    <string name="ui_already_added_tag">이미 추가되어있는 태그입니다.</string>
+    <string name="ui_alert_add_tag_more">태그를 하나 이상 추가해주세요.</string>
 </resources>

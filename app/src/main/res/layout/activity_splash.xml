@@ -28,11 +28,31 @@
         android:background="@color/neumorphism.Background">
 
         <soup.neumorphism.NeumorphCardView
+            android:id="@+id/SplashPolicyTitleContainer"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_marginBottom="50dp"
+            style="@style/Neumorphism.CardView"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingStart="@dimen/neumorphism_padding"
+                android:paddingEnd="@dimen/neumorphism_padding"
+                android:gravity="center_vertical"
+                android:text="@string/ui_service_policy"
+                android:textAppearance="@style/Font.Title"/>
+
+        </soup.neumorphism.NeumorphCardView>
+
+        <soup.neumorphism.NeumorphCardView
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginBottom="50dp"
             style="@style/Neumorphism.CardView"
-            app:layout_constraintTop_toTopOf="parent"
+            app:neumorph_shapeType="pressed"
+            app:layout_constraintTop_toBottomOf="@id/SplashPolicyTitleContainer"
             app:layout_constraintBottom_toTopOf="@id/SplashAcceptButton">
 
             <ScrollView

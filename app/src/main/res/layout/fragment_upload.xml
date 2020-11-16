@@ -44,15 +44,24 @@
                 style="@style/Neumorphism.Button"
                 app:layout_constraintTop_toBottomOf="@id/UploadPreviewContainer" />
 
-            <soup.neumorphism.NeumorphCardView
-                android:id="@+id/UploadFormTagContainer"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/TagListView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/UploadSelectImage"
+                tools:listitem="@layout/layout_tag_list_item"/>
+
+            <soup.neumorphism.NeumorphCardView
+                android:id="@+id/UploadFormTagEditContainer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 style="@style/Neumorphism.CardView"
-                app:layout_constraintTop_toBottomOf="@id/UploadSelectImage">
+                app:layout_constraintTop_toBottomOf="@id/TagListView"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/UploadFormTagAddButton">
 
                 <EditText
-                    android:id="@+id/UploadFormTag"
+                    android:id="@+id/UploadFormTagEdit"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:padding="@dimen/neumorphism_padding"
@@ -65,12 +74,25 @@
 
             </soup.neumorphism.NeumorphCardView>
 
+            <soup.neumorphism.NeumorphImageButton
+                android:id="@+id/UploadFormTagAddButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="20dp"
+                android:src="@drawable/ic_add"
+                android:tint="@color/neumorphism.Text"
+                style="@style/Neumorphism.ImageButton"
+                app:neumorph_backgroundColor="@color/neumorphism.Accent"
+                app:layout_constraintTop_toBottomOf="@id/TagListView"
+                app:layout_constraintLeft_toRightOf="@id/UploadFormTagEditContainer"
+                app:layout_constraintRight_toRightOf="parent" />
+
             <soup.neumorphism.NeumorphCardView
                 android:id="@+id/UploadFormLicenseContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/Neumorphism.CardView"
-                app:layout_constraintTop_toBottomOf="@id/UploadFormTagContainer">
+                app:layout_constraintTop_toBottomOf="@id/UploadFormTagEditContainer">
 
                 <RadioGroup
                     android:id="@+id/UploadFormLicense"
