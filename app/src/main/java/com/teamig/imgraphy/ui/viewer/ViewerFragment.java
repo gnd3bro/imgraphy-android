@@ -1,5 +1,7 @@
 package com.teamig.imgraphy.ui.viewer;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -49,6 +51,7 @@ public class ViewerFragment extends Fragment {
     private ImageView viewerImage;
     private TextView viewerShareCount;
     private TextView viewerFavCount;
+    private ImageButton viewerLinkButton;
     private Button viewerShareButton;
     private ImageButton viewerFavButton;
     private TextView viewerLicense;
@@ -85,6 +88,7 @@ public class ViewerFragment extends Fragment {
         viewerImage = (ImageView) root.findViewById(R.id.ViewerImage);
         viewerShareCount = (TextView) root.findViewById(R.id.ViewerShareCount);
         viewerFavCount = (TextView) root.findViewById(R.id.ViewerFavCount);
+        viewerLinkButton = (ImageButton) root.findViewById(R.id.ViewerLinkButton);
         viewerShareButton = (Button) root.findViewById(R.id.ViewerShareButton);
         viewerFavButton = (ImageButton) root.findViewById(R.id.ViewerFavButton);
         viewerLicense = (TextView) root.findViewById(R.id.ViewerLicense);
@@ -107,7 +111,8 @@ public class ViewerFragment extends Fragment {
     private void initObservers() {
         viewModel.graphy.observe(getViewLifecycleOwner(), graphy -> {
             if (viewModel.graphyUrl.getValue() == null) {
-                viewModel.graphyUrl.postValue("https://api.novang.tk/imgraphy/files/img/" + graphy.uuid + "/" + graphy.uuid);
+                viewModel.graphyUrl.postValue("https://api.novang.tk/imgraphy/files/img/"
+                        .concat(graphy.uuid).concat("/").concat(graphy.uuid).concat(".").concat(graphy.ext));
 
                 if (viewModel.userID.getValue().equals(viewModel.graphy.getValue().uploader)) {
                     viewerDeprecateButton.setVisibility(View.VISIBLE);
@@ -159,6 +164,14 @@ public class ViewerFragment extends Fragment {
     }
 
     private void initEvents() {
+        viewerLinkButton.setOnClickListener(v -> {
+            viewModel.shareCount();
+            Intent intent = new Intent(Intent.ACTION_SEND);
+            intent.putExtra(Intent.EXTRA_TEXT, viewModel.graphyUrl.getValue());
+            intent.setType("text/plain");
+            startActivity(Intent.createChooser(intent, getString(R.string.ui_share)));
+        });
+
         viewerShareButton.setOnClickListener(v -> {
             viewModel.shareCount();
             GlideApp.with(root)

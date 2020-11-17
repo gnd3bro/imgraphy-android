@@ -107,7 +107,7 @@ public class ImgraphyType {
         public static class List {
 
             public int max, from;
-            public String keyword;
+            public String keyword, userid;
 
             public List() {}
 
@@ -115,12 +115,14 @@ public class ImgraphyType {
                 this.max = max;
                 this.from = from;
                 this.keyword = "";
+                this.userid = "";
             }
 
-            public List(int max, int from, String keyword) {
+            public List(int max, int from, String keyword, String userid) {
                 this.max = max;
                 this.from = from;
                 this.keyword = keyword;
+                this.userid = userid;
             }
         }
 

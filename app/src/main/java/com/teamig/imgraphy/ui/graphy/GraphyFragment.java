@@ -71,7 +71,7 @@ public class GraphyFragment extends Fragment {
         viewModel.keyword.observe(getViewLifecycleOwner(), s -> {
             graphySearchInput.setText(s);
 
-            viewModel.getGraphy(new ImgraphyType.Options.List(30, 0, s)).observe(getViewLifecycleOwner(), graphies -> {
+            viewModel.getGraphy(new ImgraphyType.Options.List(30, 0, s, null)).observe(getViewLifecycleOwner(), graphies -> {
                 graphyListAdapter.updateList(graphies);
                 graphyListAdapter.notifyDataSetChanged();
                 graphyListView.scrollToPosition(0);
@@ -81,7 +81,7 @@ public class GraphyFragment extends Fragment {
 
     private void initEvents() {
         graphyListAdapter.setOnScrollLastItemListener(adapter -> {
-            viewModel.getGraphy(new ImgraphyType.Options.List(30, adapter.getItemCount(), viewModel.keyword.getValue()))
+            viewModel.getGraphy(new ImgraphyType.Options.List(30, adapter.getItemCount(), viewModel.keyword.getValue(), null))
                     .observe(getViewLifecycleOwner(), graphies -> {
                         adapter.putList(graphies);
                         adapter.setOnLoading(false);

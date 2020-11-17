@@ -79,6 +79,18 @@ tools:context=".ui.viewer.ViewerFragment">
 
         </soup.neumorphism.NeumorphCardView>
 
+        <soup.neumorphism.NeumorphImageButton
+            android:id="@+id/ViewerLinkButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="24dp"
+            android:tint="@color/neumorphism.Accent"
+            android:src="@drawable/ic_out"
+            style="@style/Neumorphism.ImageButton"
+            app:layout_constraintTop_toBottomOf="@id/ViewerImageContainer"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/ViewerShareButton"/>
+
         <soup.neumorphism.NeumorphButton
             android:id="@+id/ViewerShareButton"
             android:layout_width="0dp"
@@ -88,14 +100,14 @@ tools:context=".ui.viewer.ViewerFragment">
             android:textColor="@color/neumorphism.Accent"
             style="@style/Neumorphism.Button"
             app:layout_constraintTop_toBottomOf="@id/ViewerImageContainer"
-            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/ViewerLinkButton"
             app:layout_constraintRight_toLeftOf="@id/ViewerFavButton"/>
 
         <soup.neumorphism.NeumorphImageButton
             android:id="@+id/ViewerFavButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="20dp"
+            android:padding="24dp"
             android:tint="@color/neumorphism.Stroke"
             android:src="@drawable/ic_like"
             style="@style/Neumorphism.ImageButton"

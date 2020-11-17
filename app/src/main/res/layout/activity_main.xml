@@ -29,6 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/neumorphism.Background"
+            app:labelVisibilityMode="unlabeled"
             app:elevation="0dp"
             app:menu="@menu/bottom_nav_menu"/>
 

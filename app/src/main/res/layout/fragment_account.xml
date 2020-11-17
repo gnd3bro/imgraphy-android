@@ -8,31 +8,12 @@
     tools:context=".ui.account.AccountFragment">
 
     <soup.neumorphism.NeumorphCardView
-        android:id="@+id/ImgraphyUserIdContainer"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        style="@style/Neumorphism.CardView"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/ImgraphyUserId"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingStart="@dimen/neumorphism_padding"
-            android:paddingEnd="@dimen/neumorphism_padding"
-            android:gravity="center_vertical"
-            android:text="@string/ui_account_my_graphy"
-            android:textAppearance="@style/Font.MainList"/>
-
-    </soup.neumorphism.NeumorphCardView>
-
-    <soup.neumorphism.NeumorphCardView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         style="@style/Neumorphism.CardView"
         app:neumorph_shapeType="pressed"
-        app:layout_constraintTop_toBottomOf="@id/ImgraphyUserIdContainer"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/MyUploadListButton">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/GraphyListView"
@@ -43,5 +24,29 @@
             tools:listitem="@layout/layout_graphy_list_item"/>
 
     </soup.neumorphism.NeumorphCardView>
+
+    <soup.neumorphism.NeumorphButton
+        android:id="@+id/MyUploadListButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/ui_tab_my_upload"
+        android:textAppearance="@style/Font.SubHeader"
+        android:textColor="@color/neumorphism.Text"
+        style="@style/Neumorphism.Button"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/MyLikedListButton"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <soup.neumorphism.NeumorphButton
+        android:id="@+id/MyLikedListButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/ui_tab_liked"
+        android:textAppearance="@style/Font.SubHeader"
+        android:textColor="@color/neumorphism.Text"
+        style="@style/Neumorphism.Button"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/MyUploadListButton"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

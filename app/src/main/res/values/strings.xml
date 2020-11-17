@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">Imgraphy</string>
-    <string name="title_graphy">Graphy</string>
-    <string name="title_viewer">Viewer</string>
+    <string name="title_graphy">그래피</string>
+    <string name="title_recommend">추천</string>
+    <string name="title_viewer">뷰어</string>
     <string name="title_upload">업로드</string>
     <string name="title_account">계정</string>
     <string name="license_non">No License (없음)</string>
@@ -15,7 +16,7 @@
     <string name="ui_count">count</string>
     <string name="ui_image_description">이미지</string>
     <string name="ui_select_image">이미지 선택</string>
-    <string name="ui_input_tags">태그 입력</string>
+    <string name="ui_input_tags">태그 입력 (세 개 이상)</string>
     <string name="ui_tag_temp">tag</string>
     <string name="ui_accept">동의</string>
     <string name="ui_search_hint">검색 (태그, 사용자 ID)</string>
@@ -28,5 +29,7 @@
     <string name="ui_date_temp">2020-01-01 10:10</string>
     <string name="ui_account_my_graphy">내 게시물</string>
     <string name="ui_already_added_tag">이미 추가되어있는 태그입니다.</string>
-    <string name="ui_alert_add_tag_more">태그를 하나 이상 추가해주세요.</string>
+    <string name="ui_alert_add_tag_more">태그를 세 개 이상 추가해주세요.</string>
+    <string name="ui_tab_liked">좋아요 목록</string>
+    <string name="ui_tab_my_upload">업로드 목록</string>
 </resources>

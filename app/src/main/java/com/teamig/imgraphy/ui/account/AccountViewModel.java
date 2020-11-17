@@ -22,7 +22,14 @@ public class AccountViewModel extends ViewModel {
     }
 
     public LiveData<List<ImgraphyType.Graphy>> getGraphy(ImgraphyType.Options.List option) {
+        option.keyword = userID.getValue();
 
         return imgraphy.requestList(option);
+    }
+
+    public LiveData<List<ImgraphyType.Graphy>> getLiked(ImgraphyType.Options.List option) {
+        option.userid = userID.getValue();
+
+        return imgraphy.requestLikedList(option);
     }
 }

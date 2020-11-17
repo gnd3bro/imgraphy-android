@@ -16,6 +16,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.teamig.imgraphy.ui.account.AccountFragmentDirections;
 import com.teamig.imgraphy.ui.graphy.GraphyFragmentArgs;
 import com.teamig.imgraphy.ui.graphy.GraphyFragmentDirections;
+import com.teamig.imgraphy.ui.recommend.RecommendFragment;
+import com.teamig.imgraphy.ui.recommend.RecommendFragmentDirections;
 import com.teamig.imgraphy.ui.upload.UploadFragmentDirections;
 
 public class MainActivity extends AppCompatActivity {
@@ -60,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
 
             if (itemId == R.id.navigation_graphy) {
                 navController.navigate(GraphyFragmentDirections.actionGlobalNavigationGraphy(userID, null));
+            } else if (itemId == R.id.navigation_recommend) {
+                navController.navigate(RecommendFragmentDirections.actionGlobalNavigationRecommend(userID));
             } else if (itemId == R.id.navigation_upload) {
                 navController.navigate(UploadFragmentDirections.actionGlobalNavigationUpload(userID));
             } else if (itemId == R.id.navigation_account) {

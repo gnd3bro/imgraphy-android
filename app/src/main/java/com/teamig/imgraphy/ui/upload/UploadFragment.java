@@ -142,7 +142,7 @@ public class UploadFragment extends Fragment {
         });
 
         uploadFormButton.setOnClickListener(v -> {
-            if(viewModel.inputTagList.getValue().isEmpty()) {
+            if(viewModel.inputTagList.getValue().size() < 3) {
                 Toast.makeText(this.getContext(), R.string.ui_alert_add_tag_more, Toast.LENGTH_SHORT).show();
                 return ;
             }

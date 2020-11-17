@@ -20,6 +20,17 @@ public interface ImgraphyService {
                                                 @Query("from") int from,
                                                 @Query("keyword") String keyword);
 
+    @Headers({"Content-Type: application/json; charset=UTF-8"})
+    @GET("api/recommend.php")
+    Call<List<ImgraphyType.Graphy>> requestRecommendList(@Query("max") int max,
+                                                         @Query("from") int from);
+
+    @Headers({"Content-Type: application/json; charset=UTF-8"})
+    @GET("api/liked.php")
+    Call<List<ImgraphyType.Graphy>> requestLikedList(@Query("max") int max,
+                                                     @Query("from") int from,
+                                                     @Query("userid") String userid);
+
     @Headers({"Content-Type: charset=UTF-8"})
     @Multipart
     @POST("api/upload.php")

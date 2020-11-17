@@ -6,12 +6,15 @@
         android:icon="@drawable/ic_graphy"
         android:title="@string/title_graphy" />
 
+    <item
+        android:id="@+id/navigation_recommend"
+        android:icon="@drawable/ic_like"
+        android:title="@string/title_recommend" />
 
     <item
         android:id="@+id/navigation_upload"
         android:icon="@drawable/ic_upload"
         android:title="@string/title_upload" />
-
 
     <item
         android:id="@+id/navigation_account"
