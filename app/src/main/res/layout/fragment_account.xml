@@ -15,6 +15,18 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/MyUploadListButton">
 
+        <soup.neumorphism.NeumorphTextView
+            android:id="@+id/GraphyListEmpty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            style="@style/Neumorphism.TextView"
+            android:text="@string/ui_no_list"
+            android:textColor="@color/neumorphism.Accent"
+            android:textStyle="bold"
+            android:textAppearance="@style/Font.Description"
+            app:neumorph_shadowElevation="1dp"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/GraphyListView"
             android:layout_width="match_parent"

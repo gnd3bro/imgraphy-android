@@ -32,4 +32,5 @@
     <string name="ui_alert_add_tag_more">태그를 세 개 이상 추가해주세요.</string>
     <string name="ui_tab_liked">좋아요 목록</string>
     <string name="ui_tab_my_upload">업로드 목록</string>
+    <string name="ui_no_list">목록 없음</string>
 </resources>

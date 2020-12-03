@@ -20,6 +20,8 @@ import com.teamig.imgraphy.adapter.GraphyListAdapter;
 import com.teamig.imgraphy.service.ImgraphyType;
 import com.teamig.imgraphy.ui.viewer.ViewerFragmentDirections;
 
+import org.w3c.dom.Text;
+
 public class AccountFragment extends Fragment {
 
 
@@ -29,6 +31,8 @@ public class AccountFragment extends Fragment {
 
     private Button myUploadListButton;
     private Button myLikedListButton;
+
+    private TextView graphyListEmpty;
 
     private RecyclerView graphyListView;
     private GraphyListAdapter graphyListAdapter;
@@ -57,6 +61,8 @@ public class AccountFragment extends Fragment {
         myUploadListButton = (Button) root.findViewById(R.id.MyUploadListButton);
         myLikedListButton = (Button) root.findViewById(R.id.MyLikedListButton);
 
+        graphyListEmpty = (TextView) root.findViewById(R.id.GraphyListEmpty);
+
         graphyListView = (RecyclerView) root.findViewById(R.id.GraphyListView);
         graphyListAdapter = new GraphyListAdapter(graphyListView);
         graphyListLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
@@ -78,7 +84,18 @@ public class AccountFragment extends Fragment {
             myUploadListButton.setTextColor(getContext().getColor(R.color.neumorphism_Accent));
             myLikedListButton.setTextColor(getContext().getColor(R.color.neumorphism_Stroke));
 
-            loadMyUploadList();
+            viewModel.getGraphy(new ImgraphyType.Options.List(30, 0, null, null))
+                    .observe(getViewLifecycleOwner(), graphy -> {
+                        if (graphy.size() > 0) {
+                            graphyListAdapter.updateList(graphy);
+                            graphyListView.scrollToPosition(0);
+                            graphyListEmpty.setVisibility(View.GONE);
+                            graphyListView.setVisibility(View.VISIBLE);
+                        } else {
+                            graphyListView.setVisibility(View.GONE);
+                            graphyListEmpty.setVisibility(View.VISIBLE);
+                        }
+            });
 
             graphyListAdapter.setOnScrollLastItemListener(adapter -> {
                 viewModel.getGraphy(new ImgraphyType.Options.List(30, adapter.getItemCount(), null, null))
@@ -95,9 +112,15 @@ public class AccountFragment extends Fragment {
 
             viewModel.getLiked(new ImgraphyType.Options.List(30, 0, null, null))
                     .observe(getViewLifecycleOwner(), graphy -> {
-                        graphyListAdapter.updateList(graphy);
-                        graphyListAdapter.notifyDataSetChanged();
-                        graphyListView.scrollToPosition(0);
+                        if (graphy.size() > 0) {
+                            graphyListAdapter.updateList(graphy);
+                            graphyListView.scrollToPosition(0);
+                            graphyListEmpty.setVisibility(View.GONE);
+                            graphyListView.setVisibility(View.VISIBLE);
+                        } else {
+                            graphyListView.setVisibility(View.GONE);
+                            graphyListEmpty.setVisibility(View.VISIBLE);
+                        }
                     });
 
             graphyListAdapter.setOnScrollLastItemListener(adapter -> {
@@ -114,12 +137,4 @@ public class AccountFragment extends Fragment {
         });
     }
 
-    private void loadMyUploadList() {
-        viewModel.getGraphy(new ImgraphyType.Options.List(30, 0, null, null))
-                .observe(getViewLifecycleOwner(), graphy -> {
-                    graphyListAdapter.updateList(graphy);
-                    graphyListAdapter.notifyDataSetChanged();
-                    graphyListView.scrollToPosition(0);
-                });
-    }
 }
