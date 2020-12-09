@@ -31,7 +31,6 @@ public interface ImgraphyService {
                                                      @Query("from") int from,
                                                      @Query("userid") String userid);
 
-    @Headers({"Content-Type: charset=UTF-8"})
     @Multipart
     @POST("api/upload.php")
     Call<ImgraphyType.Result> uploadGraphy(@Part("tag") RequestBody tag,
